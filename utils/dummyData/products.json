@@ -1,0 +1,74 @@
+[{
+  "title": "core i3",
+  "slug": "core i3",
+  "quantity": 102,
+  "sold": 51,
+  "price": 64,
+  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
+  "category": "65017b7e2e34fb5c36609130",
+  "priceAfterDiscount": 50,
+  "imageCover": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+  "ratingsAverage": 5.0,
+  "ratingsQuantity": 42,
+  "subCategory": ["6501b06ffc435b79564da3de","6501b07efc435b79564da3e0"]
+},
+{
+  "title": "core i5",
+  "slug": "core i5",
+  "quantity": 102,
+  "sold": 51,
+  "price": 74,
+  "priceAfterDiscount": 55,
+  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
+  "category": "65017b7e2e34fb5c36609130",
+  "imageCover": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+  "ratingsAverage": 4.1,
+  "ratingsQuantity": 42,
+  "subCategory": ["6501b06ffc435b79564da3de","6501b07efc435b79564da3e0"]
+
+},
+{
+  "title": "core i7",
+  "slug": "core i7",
+  "quantity": 102,
+  "priceAfterDiscount": 45,
+  "sold": 51,
+  "price": 84,
+  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
+  "category": "65017b7e2e34fb5c36609130",
+  "imageCover": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+  "ratingsAverage": 3.0,
+  "ratingsQuantity": 42,
+  "subCategory": ["6501b06ffc435b79564da3de","6501b07efc435b79564da3e0"]
+
+},
+{
+  "title": "white shoes",
+  "slug": "white shoes",
+  "quantity": 12,
+  "sold": 51,
+  "price": 50,
+  "priceAfterDiscount": 20,
+  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
+  "category": "65017b912e34fb5c36609132",
+  "imageCover": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+  "ratingsAverage": 4.0,
+  "ratingsQuantity": 42,
+  "subCategory": ["6501b608fc435b79564da3e2"]
+
+},
+{
+  "title": "black shoes",
+  "slug": "black shoes",
+  "quantity": 12,
+  "sold": 51,
+  "price": 60,
+  "priceAfterDiscount": 25,
+  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
+  "category": "65017b912e34fb5c36609132",
+  "imageCover": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+  "ratingsAverage": 4.8,
+  "ratingsQuantity": 42,
+  "subCategory": ["6501b608fc435b79564da3e2"]
+}
+]
