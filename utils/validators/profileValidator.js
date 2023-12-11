@@ -5,24 +5,24 @@ const { getProfileByKey, getProfileById } = require("../../services/profileServi
 
 
 
-exports.unAssignProfileValidator=[
+exports.unAssignProfileValidator = [
   check("doctor_id")
-  .notEmpty()
-  .withMessage("doctor id is required"),
+    .notEmpty()
+    .withMessage("doctor id is required"),
   check("clinic_id")
-  .notEmpty()
-  .withMessage("clinic id is required")
-  .custom(async(val, { req }) => {
+    .notEmpty()
+    .withMessage("clinic id is required")
+    .custom(async (val, { req }) => {
 
-    const profile = await getProfileById(req.params.profile_id)
-    const isSubArray = val.every(value => profile.clinic_id.includes(value));
+      const profile = await getProfileById(req.params.profile_id)
+      const isSubArray = val.every(value => profile.clinic_id.includes(value));
 
-    if (!isSubArray) {
-      throw new Error("some of the clinic ids is not existed");
-  }
-  return true
-}  )
-     ,validatorMiddleware
+      if (!isSubArray) {
+        throw new Error("some of the clinic ids is not existed");
+      }
+      return true
+    })
+  , validatorMiddleware
 ]
 // exports.getProfilesValidator = [
 //   check("doctor_id").isEmpty().withMessage("invalid doctor ID"),
@@ -34,33 +34,33 @@ exports.createProfileValidator = [
     .withMessage("must be at least 3 chars")
     .notEmpty()
     .withMessage("profile required")
-    .custom(async(val, { req }) => {
+    .custom(async (val, { req }) => {
 
       const profile = await getProfileByKey({ profile_name: val, doctor_id: req.body.doctor_id })
       if (profile) {
         throw new Error("profile already exists");
       }
-        req.body.slug = slugify(val);
-        return true;
+      req.body.slug = slugify(val);
+      return true;
     }),
 
-     check("doctor_id")
-       .notEmpty()
-       .withMessage("doctor id is required"),
+  check("doctor_id")
+    .notEmpty()
+    .withMessage("doctor id is required"),
 
-       check("clinic_id")
-       .notEmpty()
-       .withMessage("clinic id is required"),
-    check("appointmets_per_slot")
-      .notEmpty()
-      .withMessage("appointmets_per_slot  is required")
-      .isNumeric()
-      .withMessage("appointmets_per_slot must be a number"),
-    check("slots")
-      .notEmpty()
-      .withMessage("slots must not be empty")
-      .isArray()
-      .withMessage("slots must be an array of objects"),
+  check("clinic_id")
+    .notEmpty()
+    .withMessage("clinic id is required"),
+  check("appointmets_per_slot")
+    .notEmpty()
+    .withMessage("appointmets_per_slot  is required")
+    .isNumeric()
+    .withMessage("appointmets_per_slot must be a number"),
+  check("slots")
+    .notEmpty()
+    .withMessage("slots must not be empty")
+    .isArray()
+    .withMessage("slots must be an array of objects"),
   //   check("price")
   //     .notEmpty()
   //     .withMessage("Product price is required")
@@ -170,7 +170,21 @@ exports.createProfileValidator = [
 //   validatorMiddleware,
 // ];
 
-// exports.deleteProductValidator = [
-//   check("id").isMongoId().withMessage("Invalid ID formate"),
-//   validatorMiddleware
-// ];
+exports.deleteProfileValidator = [
+  check('profile_id').isMongoId().withMessage("Invalid")
+
+    .custom(async (val) => {
+      console.log(val)
+      const profile = await getProfileById(val)
+      if (!profile) {
+        throw new Error("profile is not exist");
+      } else if (profile.clinic_id.length > 0) {
+        throw new Error("profile is being used by one or more clinic")
+      }
+      else {
+
+        return true;
+      }
+    })
+  , validatorMiddleware
+];

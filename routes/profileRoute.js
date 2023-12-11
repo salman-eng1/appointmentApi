@@ -4,7 +4,8 @@ const router = express.Router();
 
 const {
   createProfileValidator,
-  unAssignProfileValidator
+  unAssignProfileValidator,
+  deleteProfileValidator
     //   deleteUserValidator,
   //   createUserValidator,
   //   changeUserPasswordValidator,
@@ -34,6 +35,6 @@ router.route("/updateProfile/:profile_id")
 // Route for updating and deleting a profile by profile_id
 router.route("/:profile_id")
   .put(assignProfile)
-  .delete(deleteProfile);
+  .delete(deleteProfileValidator,deleteProfile);
 
 module.exports = router;
