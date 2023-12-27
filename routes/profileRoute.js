@@ -6,19 +6,17 @@ const {
   createProfileValidator,
   unAssignProfileValidator,
   deleteProfileValidator
-    //   deleteUserValidator,
-  //   createUserValidator,
-  //   changeUserPasswordValidator,
+
 } = require("../utils/validators/profileValidator");
 const {
   getProfilesByDoctorId,
   createNewProfile,
   getAllProfiles,
 
-updateProfile,
+  updateProfile,
   assignProfile,
-    deleteProfile,
-    unAssignProfile
+  deleteProfile,
+  unAssignProfile
 } = require("../controllers/profileController");
 router.post("/", createProfileValidator, createNewProfile);
 
@@ -28,13 +26,13 @@ router.get("/", getAllProfiles);
 // Route for getting profiles by id
 router.get("/:doctor_id", getProfilesByDoctorId);
 
-router.route("/updateProfile/:profile_id")
+router.route("/updateProfile/:_id")
   .put(updateProfile)
-  router.route("/unAssignProfile/:profile_id")
-  .put(unAssignProfileValidator,unAssignProfile)
-// Route for updating and deleting a profile by profile_id
-router.route("/:profile_id")
+router.route("/unAssignProfile/:_id")
+  .put(unAssignProfileValidator, unAssignProfile)
+// Route for updating and deleting a profile by _id
+router.route("/:_id")
   .put(assignProfile)
-  .delete(deleteProfileValidator,deleteProfile);
+  .delete(deleteProfileValidator, deleteProfile);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const morgan = require("morgan");
 dotenv.config(".env");
 const globalError = require("./middlewares/errorMiddleware");
 const profileRoute=require("./routes/profileRoute");
+const appointmentRoute=require("./routes/appointmentRoute");
 
 
 dbConnection(process.env.DB_URI);
@@ -17,6 +18,8 @@ app.use(morgan("dev"));
 // mountRoutes(app);
 
 app.use("/api/v1/profile", profileRoute);
+app.use("/api/v1/appointment", appointmentRoute);
+
 app.all("*", (req, res, next) => {
   next(new Error(`Can't find this route: ${req.originalUrl}`, 400));
 });

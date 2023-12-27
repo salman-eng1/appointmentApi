@@ -14,7 +14,7 @@ exports.unAssignProfileValidator = [
     .withMessage("clinic id is required")
     .custom(async (val, { req }) => {
 
-      const profile = await getProfileById(req.params.profile_id)
+      const profile = await getProfileById(req.params._id)
       const isSubArray = val.every(value => profile.clinic_id.includes(value));
 
       if (!isSubArray) {
@@ -171,7 +171,7 @@ exports.createProfileValidator = [
 // ];
 
 exports.deleteProfileValidator = [
-  check('profile_id').isMongoId().withMessage("Invalid")
+  check('_id').isMongoId().withMessage("Invalid")
 
     .custom(async (val) => {
       console.log(val)

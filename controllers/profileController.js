@@ -127,15 +127,18 @@ exports.assignProfile = asyncHandler(async (req, res, next) => {
         return res.status(400).json({ data: `There is no profile for doctor Id: ${doctor_id}` })
     }
 
-    else if (profile.clinic_id.includes(clinic_id)) {
-        return res.status(400).json({ error: "profile is already assigned to this clinic" })
-
-    } else {
-        const associatedClinics = profile.clinic_id
-
-        await profileService.updateProfile(profile_id, { clinic_id: [...associatedClinics, ...clinic_id] })
-        res.status(200).json({ data: "profile has been assigned to this clinic" })
-
+    else {
+        const nonExistentClinicIds = clinic_id.filter(id => !profile.clinic_id.includes(id));
+    
+        if (nonExistentClinicIds.length === 0) {
+            return res.status(400).json({ error: "Profile is already assigned to all these clinics" });
+        }
+    
+        const updatedClinicIds = [...profile.clinic_id, ...nonExistentClinicIds];
+    
+        await profileService.updateProfile(profile_id, { clinic_id: updatedClinicIds });
+    
+        res.status(200).json({ data: `Profile has been assigned to the specified clinics:[ ${nonExistentClinicIds} ]` });
     }
 
 })
