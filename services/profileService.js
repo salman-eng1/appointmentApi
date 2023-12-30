@@ -2,6 +2,7 @@ const Profile = require("../models/profileModel");
 const ApiError = require("../utils/apiError");
 const SharedRepository = require("../repositories/sharedRepository");
 
+
 const sharedRepository = new SharedRepository(Profile);
   
 
@@ -46,11 +47,13 @@ const sharedRepository = new SharedRepository(Profile);
     }
 }
 
- exports.updateProfile= (profileId, newData)=> {
+//findById must be replaced because Id is not object id supported by mongoose
+ exports.updateProfile= async (profileId, newData)=> {
     try {
-        const profile =  sharedRepository.findByIdAndUpdate(
+
+        const profile = await sharedRepository.findByIdAndUpdate(
             profileId,
-            newData
+            newData,
         );
         return profile;
     } catch (err) {
