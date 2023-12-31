@@ -9,11 +9,11 @@ const {
 } = require("../utils/validators/appointmentValidator");
 const {
 
-  createAppointment,
+  createAppointment, 
   getAvailableslotsForDoctorPerDay
 
 } = require("../controllers/appointmentController");
-router.post("/:patient_id", createAppointment);
+router.post("/:patient_id", createAppointmentValidator,createAppointment);
 router.get("/:doctor_id", getAvailableslotsForDoctorPerDay);
 
 

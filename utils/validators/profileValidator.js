@@ -1,7 +1,7 @@
 const slugify = require("slugify");
 const { check, body } = require("express-validator");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
-const { getProfileByKey, getProfileById } = require("../../services/profileService");
+const { getProfileByKey, getProfileById,getProfilesByDoctorId } = require("../../services/profileService");
 const ApiError = require("../apiError");
 
 
@@ -24,10 +24,27 @@ exports.unAssignProfileValidator = [
     })
   , validatorMiddleware
 ]
-// exports.getProfilesValidator = [
-//   check("doctor_id").isEmpty().withMessage("invalid doctor ID"),
-//   validatorMiddleware,
-// ];
+
+
+// exports.AssignProfileValidator = [
+//   check("profile_id")
+//     .notEmpty()
+//     .withMessage("profile id is required"),
+//   check("clinic_id")
+//     .notEmpty()
+//     .withMessage("clinic id is required")
+//     .custom(async (val, { req }) => {
+
+//       const profile = await getProfileByKey({doctor_id:req.params.doctor_id, clinic_id: {$in: val}})
+//       const isSubArray = val.every(value => profile.clinic_id.includes(value));
+//       if (!isSubArray) {
+//         throw new Error("some of the clinic ids is not existed");
+//       }
+//       return true
+//     })
+//   , validatorMiddleware
+// ]
+
 exports.createProfileValidator = [
   check("profile_name")
     .isLength({ min: 3 })

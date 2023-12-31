@@ -1,4 +1,4 @@
-const appointmentService = require("../services/appointementService");
+const {getAppointmentsByKey,getAppointmentByKey,createAppointment,updateAppointment,deleteAppointment} = require("../services/appointementService");
 const asyncHandler = require("express-async-handler");
 const ApiError = require("../utils/apiError");
 const Appointment = require("../models/appointementModel");
@@ -20,7 +20,7 @@ exports.createAppointment = async (req, res) => {
       appointment_Reason,
     } = req.body;
 
-    const appointment = await appointmentService.createAppointment({
+    const appointment = await createAppointment({
       profile,
       patient_id,
       doctor_id: doctor_Id,
@@ -51,7 +51,7 @@ exports.createAppointment = async (req, res) => {
 exports.getAvailableslotsForDoctorPerDay = asyncHandler(
   async (req, res) => {
     try {
-      const { doctor_id } = req.params;
+      const { user_id } = req.params;
       const inputDate = req.body.date;
       const date = new Date(`${inputDate}T00:00:00.000Z`);
       const nextDay = new Date(date);
@@ -61,7 +61,7 @@ exports.getAvailableslotsForDoctorPerDay = asyncHandler(
       nextDay.setUTCDate(date.getUTCDate() + 1);
 
       // Fetch appointments for the specified doctor and date range
-      const response = await appointmentService.getAppointmentsByKey({
+      const response = await getAppointmentsByKey({
         doctor_id: doctor_id,
         appointment_start: {
           $gte: date,
