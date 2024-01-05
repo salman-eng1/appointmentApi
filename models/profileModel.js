@@ -4,6 +4,7 @@ const {timeRangeSchema } = require("./timeRangeModel");
 
 const profileSchema = mongoose.Schema(
   {
+    
   profile_name: {
     type: String,
     required: [true, "profile required"],
@@ -30,8 +31,14 @@ const profileSchema = mongoose.Schema(
   appointmets_per_slot: {
     type: Number,
     required: [true, 'number of appointments per slot is required'],
-    min: [1, "minimum number of slots is 1"],
-    max: [5, "maximum number of slots is 5"]
+    min: [1, "minimum number of appointments is 1"],
+    max: [10, "maximum number of appointments slots is 10"]
+  },
+  sub_slots: {
+    type: Number,
+    required: [true, 'number of sub slots is required'],
+    min: [1, "minimum number of sub slots is 1"],
+    max: [10, "maximum number of sub slots is 10"]
   },
   expired: {
     type: Date,

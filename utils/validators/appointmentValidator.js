@@ -13,7 +13,7 @@ const appointment_start=convertTimeStringToDate(appointment_Date,appointment_Tim
 const appointment_end=convertTimeStringToDate(appointment_Date,appointment_Time.end)
         // Adjust the conditions based on your schema
         const appointments = await appointementService.getAppointmentsByKey({
-            'doctor_id': req.body.doctor_id,
+            'patient_id': val,
             'appointment_start': { $gte: appointment_start },
             'appointment_end': { $lte:  appointment_end }
 

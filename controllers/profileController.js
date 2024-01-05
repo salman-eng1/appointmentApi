@@ -13,6 +13,7 @@ const doctor_id=req.params.doctor_id
         clinic_id,
         clinicWorkPeriod,
         appointmets_per_slot,
+        sub_slots,
         expired,
         cancel_period,
         slots
@@ -23,6 +24,7 @@ const doctor_id=req.params.doctor_id
         clinic_id: clinic_id,
         clinicWorkPeriod: clinicWorkPeriod,
         appointmets_per_slot: appointmets_per_slot,
+        sub_slots,
         expired: expired,
         cancel_period: cancel_period,
         slots: slots
@@ -47,6 +49,7 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
         profile_id,
         clinicWorkPeriod,
         appointmets_per_slot,
+        sub_slots,
         cancel_period,
         slots
     } = req.body;
@@ -55,8 +58,10 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
         profile_name: profile_name,
         clinicWorkPeriod: clinicWorkPeriod,
         appointmets_per_slot: appointmets_per_slot,
+        sub_slots:sub_slots,
         cancel_period: cancel_period,
-        slots: slots}
+        slots: slots,
+    }
   const response= await updateProfile(profile_id, newprofile)
     res.status(201).json({ data: response });
 

@@ -45,7 +45,7 @@ class SharedRepository {
     }
 
     async findAndPopulate(id,key) {
-      const document = await this.model.find(key).populate('profile','appointmets_per_slot slots') // Specify the fields you want to populate
+      const document = await this.model.find(key).populate('profile','appointmets_per_slot slots sub_slots') // Specify the fields you want to populate
       .exec();;
       return document;
     }
