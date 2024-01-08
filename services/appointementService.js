@@ -67,7 +67,7 @@ const sharedRepository = new SharedRepository(Appointment);
     }
 }
 
-  exports.getAppointmentsByKey=(id,key) =>{
+  exports.getAppointmentsByKey=(key) =>{
     try {
         const appointment =  sharedRepository.findAndPopulate(key);
         return appointment; // Return true if key is unique, false if it already exists

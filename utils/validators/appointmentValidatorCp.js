@@ -1,9 +1,9 @@
 const { check } = require("express-validator");
 const slugify = require("slugify");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
-const appointementService = require("../../services/appointementService");
+const {getAppointmentsByKey} = require("../../services/appointementService");
 const { convertTimeStringToDate } = require("../../controllers/timeConverter");
-
+const Appointment=require("../../models/appointementModel")
 exports.createAppointmentValidator = [
   check("patient_id")
     .notEmpty()
@@ -17,12 +17,12 @@ exports.createAppointmentValidator = [
       const appointment_end = new Date(
         convertTimeStringToDate(appointment_Date, appointment_Time.end)
       );
-
       // Adjust the conditions based on your schema
-      const appointments = await appointementService.getAppointmentsByKey({
-        appointment_start: appointment_start,
-      });
-      console.log(appointments);
+      const appointments = await getAppointmentsByKey({ appointment_start: { $eq: appointment_start },appointment_end: { $eq: appointment_end } });
+      
+      // const appointments = await Appointment.find({ appointment_start: { $eq: appointment_start },appointment_end: { $eq: appointment_end } });
+      
+      console.log(appointments.length);
       let count = 0;
 
       appointments.forEach((element) => {

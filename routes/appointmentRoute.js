@@ -6,7 +6,7 @@ const {
   createAppointmentValidator,
 
 
-} = require("../utils/validators/appointmentValidator");
+} = require("../utils/validators/appointmentValidatorCp");
 const {
 
   createAppointment, 
