@@ -141,30 +141,40 @@ exports.assignProfile = asyncHandler(async (req, res, next) => {
     }
 
     else {
-        const nonExistentClinicIds = clinic_id.filter(id => !profile.clinic_id.includes(id));
+        // const nonExistentClinicIds = clinic_id.filter(id => !profile.clinic_id.includes(id));
     
-        if (nonExistentClinicIds.length === 0) {
-            return res.status(400).json({ error: "Profile is already assigned to all these clinics" });
+        if (profile.clinic_id === clinic_id) {
+            return res.status(400).json({ error: "Profile is already assigned this clinic" });
         }
     
-        const updatedClinicIds = [...profile.clinic_id, ...nonExistentClinicIds];
+        // const updatedClinicIds = [...profile.clinic_id, ...nonExistentClinicIds];
     
-        await updateProfile(profile_id, { clinic_id: updatedClinicIds,active: true });
+        await updateProfile(profile_id, { clinic_id: clinic_id,active: true });
     
-        res.status(200).json({ data: `Profile has been assigned to the specified clinics:[ ${nonExistentClinicIds} ]` });
+        res.status(200).json({ data: `Profile has been assigned to the specified clinic:[ ${clinic_id} ]` });
     }
 
 })
 
 exports.unAssignProfile= asyncHandler(async (req, res, next) => {
-    const { profile_id } = req.body
-const clinicToRemove=req.body.clinic_id
-    const { doctor_id } = req.params //doctor id must be replaced with the one in token
-    const profile = await removeFromClinicIdArray(profile_id,
-        clinicToRemove,
-)
-if (profile.clinic_id.length <= 0){
-    await updateProfile(profile_id, {active: false})
-}
-res.status(200).json({ data: profile })
-})
+    const { doctor_id } = req.params
+
+    const { profile_id, clinic_id } = req.body //doctor id must be replaced with the one in token
+    const profile = await getProfileByKey({ _id: profile_id, doctor_id:doctor_id, clinic_id: clinic_id })
+
+    //profile.doctor_id must be replaced with the one in the token
+    if (!profile) {
+        next(new ApiError("There is no profile with this id", 400))
+
+    } else if (profile.doctor_id !== doctor_id) {
+        return res.status(400).json({ data: `There is no profile for doctor Id: ${doctor_id}` })
+    }
+
+    else {    
+        
+        // const updatedClinicIds = [...profile.clinic_id, ...nonExistentClinicIds];
+    
+        await updateProfile(profile_id, { clinic_id: "",active: false });
+    
+        res.status(200).json({ data: `Profile has been dtached from clinic:[ ${clinic_id} ]` });
+}})

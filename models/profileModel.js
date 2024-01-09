@@ -19,10 +19,9 @@ const profileSchema = mongoose.Schema(
     type: String,
     required: [true, 'doctor id is required']
   },
-  clinic_id: [{
+  clinic_id: {
     type: String,
-    required: [true, 'clinic id is required']
-  }],
+  },
   clinicWorkPeriod: {
     type: timeRangeSchema,
     required: true,
@@ -38,7 +37,7 @@ const profileSchema = mongoose.Schema(
     type: Number,
     required: [true, 'number of sub slots is required'],
     min: [1, "minimum number of sub slots is 1"],
-    max: [10, "maximum number of sub slots is 10"]
+    max: [6, "maximum number of sub slots is 10"],
   },
   expired: {
     type: Date,

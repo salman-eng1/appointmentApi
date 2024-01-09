@@ -73,10 +73,11 @@ exports.getAvailableslotsForDoctorPerDay = asyncHandler(
          const profile=await getProfileByKey({doctor_id:doctor_Id})
       // Extract relevant information from the response
       const appointmets_per_slot =profile.appointmets_per_slot;
-      const availableSlots =profile.slots;
-      let subSlots=profile.sub_slots;
+        const subSlots =profile.sub_slots;
       const increasingVal = 60 / subSlots;
+      const availableSlots =profile.slots;
       const finalResponse = [];
+
 if (response.length ===0){
 
   for (let index = 0; index < availableSlots.length; index++) {
@@ -85,20 +86,7 @@ if (response.length ===0){
     const endTime = moment(item.end, "hh:mm A");
     const object = {};
     const newSlots = [];  
-const date1 = new Date(`${inputDate} ${item.start}`);
-const date2 = new Date(`${inputDate} ${item.end}`);
-
-const minutesDifference = (date2 - date1) / (1000 * 60);
-if (minutesDifference  < 60){
-   subSlots =minutesDifference/increasingVal;
-
-}else{
-  subSlots=profile.sub_slots
-}
-
-console.log(minutesDifference, increasingVal, subSlots)
-
-// console.log(minutesDifference, date1, date2);
+      
     // Generate newSlots based on the available time slots
     for (let i = 0; i < subSlots; i++) {
       const newStartTime = startTime.clone().add(i * increasingVal, "minutes");  // Use i to calculate newStartTime
