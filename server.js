@@ -20,6 +20,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/profile", profileRoute);
 app.use("/api/v1/appointment", appointmentRoute);
 
+
 app.all("*", (req, res, next) => {
   next(new Error(`Can't find this route: ${req.originalUrl}`, 400));
 });

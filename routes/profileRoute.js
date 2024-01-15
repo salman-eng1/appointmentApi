@@ -1,15 +1,15 @@
 const express = require("express");
-
+const doctorRoute=require("./doctorRoute")
 const router = express.Router();
 
 const {
   createProfileValidator,
+  AssignProfileValidator,
   unAssignProfileValidator,
   deleteProfileValidator,
   updateProfileValidator
 } = require("../utils/validators/profileValidator");
 const {
-  getProfilesByDoctorId,
   createNewProfile,
   getAllProfiles,
 
@@ -19,24 +19,23 @@ const {
   unAssignProfile
 } = require("../controllers/profileController");
 
-router.get("/", getAllProfiles);
-
-router.route("/:doctor_id")
+router.route("/")
+.get(getAllProfiles)
 .post(createProfileValidator, createNewProfile)
-.get(getProfilesByDoctorId)
+
+router.route("/:profile_id")
 .put(updateProfileValidator,updateProfile)
 .delete(deleteProfileValidator, deleteProfile);
 
 // Route for getting all profiles
-router.get("/", getAllProfiles);
-
-// Route for getting profiles by id
+router.use("/doctor", doctorRoute);
 
 
-router.route("/unAssignProfile/:doctor_id")
+
+router.route("/unAssignProfile/:profile_id")
   .put(unAssignProfileValidator, unAssignProfile)
 // Route for updating and deleting a profile by _id
-router.route("/assign/:doctor_id")
-  .put(assignProfile)
+router.route("/assign/:profile_id")
+  .put(AssignProfileValidator,assignProfile)
 
 module.exports = router;
